@@ -28,6 +28,164 @@
 
 ---
 
+### 타입
+
+- primitive vs reference
+- typeof: 레퍼런스 밸류 감별하기 어려움
+
+  - ex) typeof null : object
+
+- instanceof : 객체에 용이
+- Object.prototype.toString.call()
+
+- undefined vs null
+
+  - null은 0으로 사용될 수 있음, undefined는 NaN
+  - 둘 다 !연산자를 통해 boolean으로 변환됨
+
+- parseInt 사용자 두번째 인자에 n진수 꼭 입력추천(10진수가 기본값은 아님)
+
+- 암묵적인 형변환을 명시적으로 하자~!
+
+- isNaN 문제 많음.
+  - 은 숫자가 맞으면 false 반환이라 헷갈림.
+  - Number.isNaN 을 활용하면 더욱 엄격한 검사가 가능함.
+
+---
+
+### 경계
+
+- min, max
+
+  - 최소, 최대값 상수 선언
+  - 최소, 최대 포함여부 결정 후 네이밍에 포함시키기.
+
+- begin, end
+
+  - 예시: 달력
+
+- first, last
+
+  - 시작과 끝 사이의 요소들의 규칙등에 대한 보장이 없음.
+
+- prefix, suffix
+
+  - 접두, 접미사 (네이밍)
+  - 프라이빗한 변수 과거 \_name 현재 #name 지원
+  - 라이브러리 차원의 prefix도 있음
+
+- 매개변수의 순서가 경계다.
+  - 호출하는 함수의 네이밍과 인자의 순서를 고려한다.
+  - 매개변수를 2개가 넘지 않도록 한다.
+  - arguments, rest parameter rhfu
+  - 매개변수를 객체에 담기.
+  - 래핑하는 함수
+
+---
+
+### 분기
+
+- 삼항연산자
+
+  - 삼항연산자의 중복 -> switch case
+  - nullable 한 상황
+
+- Truthy & falsy
+
+- 단축 평가: 논리연산자를 잘 사용하자
+
+  - and: false 만나면 뒤의 조건 도달하지않음.
+  - or: true 만나면 뒤의 조건 도달하지않음.
+
+- else if & else 피하기
+
+  - else if -> else { if() } (같은 동작)
+  - 늘어지면 switch
+  - if... if... if... 이게 나을 수 있음
+  - 위의 if 에 걸리면 else 안써도됨
+
+- early return
+
+  - 함수를 미리 종료함으로써 사람이 사고하기 편함.
+
+- 부정 조건문 지양.
+
+  - ex) if(!isNaN(3)) "숫자입니다." -> isNumber 함수 만들기 / typeof 3 === 'number'
+  - 생각을 여러번 해야할 수 있다.
+  - 프로그래밍 언어 자체로 if 문이 처음부터 오고 true 부터 실행시키기 때문.
+  - early return, 유효성 검증의 경우 사용하기도 함.
+
+- Default Case
+
+  - ex) safeParseInt(number, radix) {return parseInt(number, radix || 10);}
+  - 프론트 엔드의 경우 사용자의 실수도 고려해야할 수 있음
+
+- 명시적인 연산자 사용.
+
+  - 연산사 우선순위를 외우기보다 괄호 등을 활용해 명시적으로 표시하는 것이 바람직.
+  - number++; > number = number + 1;
+  - 예측 가능하고 디버깅 쉬운코드
+
+- null 병합 연산자 ??
+
+  - null, undefined 평가 시에만 사용해야한다.
+  - || 연산자와 사용시 에러 (괄호 처리해야함)
+
+- 드모르간의 법칙
+  - !(A && B) === !A || !B
+
+---
+
+### 배열
+
+- 자바스크립트의 배열은 객체다.
+
+- Array.isArray 로 체크
+
+- Array.length
+
+  - arr.length = 10; <= 이렇게 할당하면 배열 크기가 늘어남
+  - length는 배열의 마지막 인덱스라는 의미에 가까움.
+  - Array.prototype.clear = function () {this.length = 0;} // 배열 초기화
+
+- Array.from(object)
+
+  - length도 잘 들어가서 변환됨
+
+- 유사배열객체
+  - arguments
+  - 인자 없는 함수 내부에서도 가지고 놀 수 있는 문서배열객체
+  - Array.isArray(arguments) 하면 false 임.(유사배열)
+  - Array.from 사용가능
+
+```js
+function generatePriceList() {
+  for (let i = 0; i < arguments.length; i++) {
+    const element = arguments[i];
+    console.log(element);
+  }
+}
+
+geneatePriceList(100, 200, 300, 400, 500, 600);
+```
+
+- 불변성
+
+  - 배열을 복사해야함.
+  - 새로운 배열을 반환하는 메서드를 사용.
+
+- for 문 고차함수로 리팩터링하는게 임시변수도 사용하지않고
+
+- map VS forEach
+
+  - 반환이 다르다. (map이 새 배열 반환, forEach는 그저 실행)
+
+- continue & break
+  - try... catch 구문 사용해서 error 던지기 / for 문 계열 쓰기.
+  - every(&), some(|), find등 사용
+
+---
+
 https://jsisweird.com/ 노트
 
 - true + false
