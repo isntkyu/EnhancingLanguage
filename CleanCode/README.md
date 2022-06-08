@@ -186,6 +186,62 @@ geneatePriceList(100, 200, 300, 400, 500, 600);
 
 ---
 
+## 객체
+
+- shorthand property
+
+  - concise method (함수 키워드 구분 제거 등)
+
+- Lookup table
+  - 분기문 -> key-value
+  - undefined 엔 || 나 ?? 연산자
+
+```js
+function getUserType(type) {
+  return (
+    {
+      admin: "관리자",
+      instructor: "강사",
+      student: "수강생",
+    }[type] ?? "해당없음"
+  );
+
+  // return OBJ[type] || '해당없음';
+}
+```
+
+상수로 관리하면 좋음
+
+- 구조분해할당
+
+  - 함수 인자가 3개이상, 여러개면 객체로 구성
+  - 필수인자가 있어야하는 등의 경우에 인자를 객체와 섞어서 사용후 구조분해할당
+  - 객체에 배열할당도 가능
+
+- Object.freeze
+
+  - 오브젝트 원본유지
+  - Object.isFrozen (true/false)
+  - 깊은 뎁스는 유지 안됨 (중첩 프리징해야함)
+    - 유틸 라이브러리사용
+    - 유틸함수 생성
+      - 객체순회하면서 값이 객체이면 재귀
+    - typescript readonly 사용
+
+- prototype 지양하기
+
+  - 직접 만들어 모듈화 -> npm 배포
+
+- hasOwnProperty
+
+  - Object.prototype.hasOwnProperty.call(targetObj , targetProp)
+
+- 직접 접근 지양하기
+  - 객체를 직접 건드리는 영역의 레이어를 분리(함수)
+  - 예측가능한 코드 작성, 예측가능한 앱
+
+---
+
 https://jsisweird.com/ 노트
 
 - true + false
