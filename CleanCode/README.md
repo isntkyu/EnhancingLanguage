@@ -242,6 +242,92 @@ function getUserType(type) {
 
 ---
 
+### 함수
+
+- 함수, 객체의 메서드, 생성자
+
+  - 함수의 this = 글로벌변수
+  - 생성자함수의 this = 생성될 인스턴스
+
+- argument & parameter
+
+  - 함수 정의 부분: 파라미터
+  - 실제 사용 값: 아규먼트(actual parameter)
+  - 라이브러리, 프레임워크를 만든다는 생각으로 형식을 갖춘 매개변수를 만들자
+  - 타입스크립트를 쓰면된다.
+
+- 복잡한 인자 관리하기
+
+  - 맥락과 흐름파악하기 쉽게
+  - 객체구조 분해할당을 통해 인자를 받기(순서도 상관없음)
+  - func(name, {}) 이런 식으로 중요한 옵션을 따로 빼도됨
+  - 에러를 던져서 인자 관리
+
+- Default Value
+
+  - undefined에 . 연산자를 사용하게 될 수 있는 예시 (option = option || {};)
+  - func({ ...기본값세팅(name = 'jk')... } = {}) {} //es2015 디폴트 파라미터
+    - name = required('jk') , required 함수를 생성하기.(에러 뱉기)
+
+- Rest parameter
+
+  - function Func(...args) {} // args를 배열로 사용가능
+  - function Func(initValue, ...args) {}
+  - function Func(initValue, bonusValue, ...args) {}
+  - ...args는 무조건 마지막에 넣어야함
+
+- void & return
+
+  - return alert() // 보이드 함수를 리턴하면 undefined 를 리턴하는것, 불필요함
+  - 리턴 유무를 확인하는 습관들이기
+  - array.push 함수에 반환값이 있었음. (호출한 배열의 새로운 length)
+  - 반환이 있는 함수는 네이밍부터 알 수 있게해야하며 값으로 함수를 사용가능
+
+- 화살표 함수
+
+  - 렉시컬 스코프를 가지게됨 (this)
+  - arguments 객체 사용 불가 (call, apply, bind 불가)
+    - rest parameter 사용하면됨.
+  - 생성자로 사용할 수 없음. (new 와 조합 불가능)
+  - 화살표함수로 만든 부모 클래스의 메소드를 쓸 수 없음
+  - 자식 클래스에서 오버라이딩하면 부모의 화살표함수가 호출됨
+
+- Callback 함수
+
+  - 함수의 실행권을 다른 함수에 위임하는것
+
+- 순수 함수
+
+  - 사이드 이펙트가 없어야함.
+  - 인풋 아웃풋을 잘 지켜줘야 예측가능한 순수함수
+  - 객체, 배열을 다룰 때는 새로운 객체를 생성해서 반환 // primitive, reference
+
+- Closure: 캡쳐되어있다는 느낌
+
+```js
+function add(num1) {
+  return function (num2) {
+    return function (calculateFn) {
+      return calculateFn(num1, num2);
+    };
+  };
+}
+
+function sum(num1, num2) {
+  return num1 + num2;
+}
+
+function multiple(num1, num2) {
+  return num1 * num2;
+}
+
+const addOne = add(1)(2);
+const sumAdd = addOne(sum);
+const sumMultiple = addOne(multiple);
+```
+
+---
+
 https://jsisweird.com/ 노트
 
 - true + false
