@@ -7,3 +7,9 @@ Advanced JavaScript [youtube](https://www.youtube.com/channel/UCY38RvRIxYODO4pen
 - 자막이 없는 김에 영어공부
 
 ---
+
+# pogo jang 님의 클린코드
+
+---
+
+# 타입스크립트 기초 입문
