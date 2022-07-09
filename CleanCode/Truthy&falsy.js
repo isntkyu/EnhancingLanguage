@@ -38,27 +38,27 @@ if (-Infinity) {
   console.log("true");
 }
 
-if (false) {
+if (!false) {
   console.log("false");
 }
-if (null) {
+if (!null) {
   console.log("false");
 }
-if (undefined) {
+if (!undefined) {
   console.log("false");
 }
-if (0) {
+if (!0) {
   console.log("false");
 }
-if (-0) {
+if (!-0) {
   console.log("false");
 }
-if (0n) {
+if (!0n) {
   console.log("false");
 }
-if (NaN) {
+if (!NaN) {
   console.log("false");
 }
-if ("") {
+if (!"") {
   console.log("false");
 }
